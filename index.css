@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Unif');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower|UnifrakturCook:700');
 
 body {
   background: url(wood.jpeg);
@@ -116,7 +116,7 @@ main {
   margin-left: 10vw;
   height: calc(100vh - 18.5vw - 4rem);
   overflow-y: scroll;
-  font-family: "Indie Flower", cursive;
+  font-family: cursive;
   font-size: 2rem;
   color: rgba(100, 50, 0, 0.8);
   padding: 1.5rem 4rem;

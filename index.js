@@ -1,22 +1,38 @@
 const form = document.querySelector('form');
-const schools = ["evocation", "enchantment", "conjuration", "transmutation", "divination", "illusion", "abjuration", "necromancy"]
-const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffa500', '#aa00ff', '#ffff00', '#ffffff', '#000000']
 
 addSpell = function() {
     const spellsDiv = document.querySelector('#spells');
-    const label = document.createElement('l1');
-    label.appendChild(document.createTextNode(`${form.spellName.value} requires level ${form.spellLevel.value}`));
-    label.appendChild(document.createElement('br')); 
-    console.log(schools.indexOf(form.school.value.toLowerCase()));   
-    if(schools.indexOf(form.school.value) != -1) {
-        label.style.color = colors[schools.indexOf(form.school.value)];
-    }
-    spellsDiv.appendChild(label);
+
+    spellsDiv.appendChild(addLabel());
     form.spellName.value = '';
     form.spellLevel.value = '';
-    form.school.value = '';
 };
 
+addLabel = function() {
+    const label = document.createElement('l1');
+
+    label.appendChild(addNameSpan());
+    label.appendChild(document.createTextNode(' requires level '));    
+    label.appendChild(addLevelSpan());
+    label.appendChild(document.createElement('br'));
+    return label;
+}
+
+addNameSpan = function() {
+    const spellSpan = document.createElement('span');
+    spellSpan.appendChild(document.createTextNode(`${form.spellName.value}`));
+    spellSpan.style.fontFamily = 'UnifrakturCook, sans-serif';
+    spellSpan.setAttribute('class', 'spellName');
+    return spellSpan;
+}
+
+addLevelSpan = function() {
+    const levelSpan = document.createElement('span');
+    levelSpan.appendChild(document.createTextNode(`${form.spellLevel.value}`))
+    levelSpan.style.fontFamily = 'Indie Flower, sans-serif';
+    levelSpan.setAttribute('class', 'spellLevel');
+    return levelSpan;
+}
 
 form.addEventListener('submit', function(e) {
     e.preventDefault();
