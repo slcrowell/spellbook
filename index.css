@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans%7CHomemade+Apple%7CUnifrakturCook:700');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Unif');
 
 body {
   background: url(wood.jpeg);
@@ -30,7 +30,7 @@ h1 {
   margin-left: 10vw;
   margin-top: 5vw;
   margin-bottom: 3vw;
-  color: rgba(0, 0, 0, 0.4);
+  color: rgb(255, 255, 255);  
   font-size: 8vw;
 }
 
@@ -116,7 +116,7 @@ main {
   margin-left: 10vw;
   height: calc(100vh - 18.5vw - 4rem);
   overflow-y: scroll;
-  font-family: "Homemade Apple", cursive;
+  font-family: "Indie Flower", cursive;
   font-size: 2rem;
   color: rgba(100, 50, 0, 0.8);
   padding: 1.5rem 4rem;
