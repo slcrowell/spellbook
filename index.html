@@ -8,41 +8,52 @@
     <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
 </head>
 <body>
-    <h1 id='0'>Abjuration</h1>
-    <h3 id='d0'>Blocking, banishing, protecting</h3>
-    <h1 id='1'>Conjuration</h1>
-    <h3 id='d1'>Producing things/creatures out of thin air</h3>
-    <h1 id='2'>Divination</h1>
-    <h3 id='d2'>Understanding the past, present and future</h3>
-    <h1 id='3'>Enchantment</h1>
-    <h3 id='d3'>Entrancing and beguiling people/creatures</h3>
-    <h1 id='4'>Evocation</h1>
-    <h3 id='d4'>Harnessing the power of the elements</h3>
-    <h1 id='5'>Illusion</h1>
-    <h3 id='d5'>Deception and trickery</h3>
-    <h1 id='6'>Necromancy</h1>
-    <h3 id='d6'>Dealing with life, death and undeath</h3>
-    <h1 id='7'>Transmutation</h1>
-    <h3 id='d7'>Changing energy and matter</h3>
-    
-    <form>
+    <div>
+        <h1 id='0'>Abjuration</h1>
+        <h3 id='d0'>Blocking, banishing, protecting</h3>
+        <h1 id='1'>Conjuration</h1>
+        <h3 id='d1'>Producing things/creatures out of thin air</h3>
+        <h1 id='2'>Divination</h1>
+        <h3 id='d2'>Understanding the past, present and future</h3>
+        <h1 id='3'>Enchantment</h1>
+        <h3 id='d3'>Entrancing and beguiling people/creatures</h3>
+        <h1 id='4'>Evocation</h1>
+        <h3 id='d4'>Harnessing the power of the elements</h3>
+        <h1 id='5'>Illusion</h1>
+        <h3 id='d5'>Deception and trickery</h3>
+        <h1 id='6'>Necromancy</h1>
+        <h3 id='d6'>Dealing with life, death and undeath</h3>
+        <h1 id='7'>Transmutation</h1>
+        <h3 id='d7'>Changing energy and matter</h3>
+    </div>
+    <form id='change'>
         Text to change school to:
         <input type="text" name="school"><br>
         Text to change description to:
         <input type="text" name="description"><br><br>
         School selection:<br>
-        <input type="radio" name="spellbook" value="0" checked> Abjuration<br>
-        <input type="radio" name="spellbook" value="1"> Conjuration<br>
-        <input type="radio" name="spellbook" value="2"> Divination<br>
-        <input type="radio" name="spellbook" value="3"> Enchantment<br>
-        <input type="radio" name="spellbook" value="4"> Evocation<br>
-        <input type="radio" name="spellbook" value="5"> Illusion<br>
-        <input type="radio" name="spellbook" value="6"> Necromancy<br>
-        <input type="radio" name="spellbook" value="7"> Transmutation<br><br>
+        <div>
+            <input type="radio" name="spellbook" value="0" checked> Abjuration<br>
+            <input type="radio" name="spellbook" value="1"> Conjuration<br>
+            <input type="radio" name="spellbook" value="2"> Divination<br>
+            <input type="radio" name="spellbook" value="3"> Enchantment<br>
+            <input type="radio" name="spellbook" value="4"> Evocation<br>
+            <input type="radio" name="spellbook" value="5"> Illusion<br>
+            <input type="radio" name="spellbook" value="6"> Necromancy<br>
+            <input type="radio" name="spellbook" value="7"> Transmutation<br>
+        </div>
         <input type="submit" value="Send"><br>
     </form><br>
 
-    <button>Change Text</button>&nbsp;<button id='reset'>Reset</button>
+    <form id='new'>
+        New school:
+        <input type="text" name="school"><br>
+        New description:
+        <input type="text" name="description"><br>
+        <input type="submit" value="Send"><br>
+    </form><br>
+    
+    <button>Change Text</button>&nbsp;<button id='resetText'>Reset Text</button>&nbsp;<button id='resetFull'>Reset All</button>
     <script src="index.js"></script>
 </body>
 </html>
