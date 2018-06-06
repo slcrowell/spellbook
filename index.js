@@ -2,14 +2,14 @@ const form = document.querySelector('form');
 
 addSpell = function() {
     const spellsDiv = document.querySelector('#spells');
-    if(form.spellName.value == '' || form.spellLevel.value =='') {
+    if(form.spellName.value == '' || form.spellDescription.value =='') {
         alert('EMPTY BOX. FAILED TO ADD SPELL');
         return;
     }
 
     spellsDiv.appendChild(addLabel());
     form.spellName.value = '';
-    form.spellLevel.value = '';
+    form.spellDescription.value = '';
 };
 
 addLabel = function() {
@@ -17,7 +17,7 @@ addLabel = function() {
 
     label.appendChild(addNameSpan());
     label.appendChild(addSchool());
-    label.appendChild(document.createTextNode(' requires level '));    
+    label.appendChild(addDescipSpan());   
     label.appendChild(addLevelSpan());
     label.appendChild(document.createElement('br'));
     return label;
@@ -31,10 +31,18 @@ addNameSpan = function() {
     return spellSpan;
 }
 
+addDescipSpan = function() {
+    const descripSpan = document.createElement('span');
+    descripSpan.appendChild(document.createTextNode(` ${form.spellDescription.value}`))
+    descripSpan.style.fontFamily = 'sans-serif';
+    descripSpan.setAttribute('class', 'spellDescrip');
+    return descripSpan;
+}
+
 addLevelSpan = function() {
     const levelSpan = document.createElement('span');
-    levelSpan.appendChild(document.createTextNode(`${form.spellLevel.value}`))
-    levelSpan.style.fontFamily = 'Indie Flower, sans-serif';
+    levelSpan.appendChild(document.createTextNode(` and requires level ${form.spellLevel.options[form.spellLevel.selectedIndex].value}.`))
+    levelSpan.style.fontFamily = 'sans-serif';
     levelSpan.setAttribute('class', 'spellLevel');
     return levelSpan;
 }
