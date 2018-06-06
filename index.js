@@ -2,6 +2,10 @@ const form = document.querySelector('form');
 
 addSpell = function() {
     const spellsDiv = document.querySelector('#spells');
+    if(form.spellName.value == '' || form.spellLevel.value =='') {
+        alert('EMPTY BOX. FAILED TO ADD SPELL');
+        return;
+    }
 
     spellsDiv.appendChild(addLabel());
     form.spellName.value = '';
@@ -21,7 +25,7 @@ addLabel = function() {
 
 addNameSpan = function() {
     const spellSpan = document.createElement('span');
-    spellSpan.appendChild(document.createTextNode(`${form.spellName.value})`));
+    spellSpan.appendChild(document.createTextNode(`${form.spellName.value} `));
     spellSpan.style.fontFamily = 'UnifrakturCook, sans-serif';
     spellSpan.setAttribute('class', 'spellName');
     return spellSpan;
@@ -37,6 +41,7 @@ addLevelSpan = function() {
 
 addSchool = function() {
     const schoolSpan = document.createElement('span');
+    document.getElementById('school').src = form.school.options[form.school.selectedIndex].value + ' symbol.jpg';   
     schoolSpan.appendChild(document.createTextNode(` (${form.school.options[form.school.selectedIndex].value})`));
     schoolSpan.style.fontFamily = 'UnifrakturCook, sans-serif';
     schoolSpan.setAttribute('class', 'school');

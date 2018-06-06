@@ -10,11 +10,10 @@ body {
   font-family: "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-img#skull {
+img#school {
   position: absolute;
   right: 5vw;
   top: 5vw;
-  transform: rotate(15deg);
   width: 25vw;
 }
 
