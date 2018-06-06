@@ -8,8 +8,8 @@
   <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
 </head>
 <body>
+  <img src="skull.png" id="skull" alt="">
   <img src="quill.png" id="quill" alt="">
-  <img src="skull.png" id="school" alt="">
 
   <h1>Spellbook</h1>
 
@@ -22,33 +22,13 @@
         autofocus
       >
       <input
-        type="text"
-        name="spellDescription"
-        placeholder="Enter a spell description"
+        type="number"
+        name="level"
+        placeholder="Level"
+        class="small"
+        min="1"
+        max="20"
       >
-      <select id='spellLevel'>
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-      </select>
-      <select id='school'>
-        <option value="abjuration">Abjuration</option>
-        <option value="conjuration">Conjuration</option>
-        <option value="divination">Divination</option>
-        <option value="enchantment">Enchantment</option>
-        <option value="evocation">Evocation</option>
-        <option value="illusion">Illusion</option>
-        <option value="necromancy">Necromancy</option>
-        <option value="transmutation">Transmutation</option>
-      </select>
       <button type="submit">Add</button>
     </div>
   </form>
