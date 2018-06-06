@@ -34,7 +34,7 @@ addNameSpan = function() {
 addDescipSpan = function() {
     const descripSpan = document.createElement('span');
     descripSpan.appendChild(document.createTextNode(` ${form.spellDescription.value}`))
-    descripSpan.style.fontFamily = 'sans-serif';
+    descripSpan.style.fontFamily = 'Nanum Pen Script, sans-serif';
     descripSpan.setAttribute('class', 'spellDescrip');
     return descripSpan;
 }
@@ -42,7 +42,7 @@ addDescipSpan = function() {
 addLevelSpan = function() {
     const levelSpan = document.createElement('span');
     levelSpan.appendChild(document.createTextNode(` and requires level ${form.spellLevel.options[form.spellLevel.selectedIndex].value}.`))
-    levelSpan.style.fontFamily = 'sans-serif';
+    levelSpan.style.fontFamily = 'Indie Flower, sans-serif';
     levelSpan.setAttribute('class', 'spellLevel');
     return levelSpan;
 }
@@ -51,7 +51,7 @@ addSchool = function() {
     const schoolSpan = document.createElement('span');
     document.getElementById('school').src = form.school.options[form.school.selectedIndex].value + ' symbol.jpg';   
     schoolSpan.appendChild(document.createTextNode(` (${form.school.options[form.school.selectedIndex].value})`));
-    schoolSpan.style.fontFamily = 'UnifrakturCook, sans-serif';
+    schoolSpan.style.fontFamily = 'Kaushan Script, sans-serif';
     schoolSpan.setAttribute('class', 'school');
     return schoolSpan;
 }
