@@ -133,6 +133,41 @@ const app = {
             
         });
 
+        item.querySelector('button.down').addEventListener('click', () => {
+            // Find it in the array
+            const i = spellList[spell.schooling].indexOf(spell)
+
+            // Only move it if it's not already last
+            if (i < spellList[spell.schooling].length - 1) {
+                // Move it on the page
+                list.insertBefore(item.nextSibling, item)
+
+                // Move it in the array
+                const nextSpell = spellList[spell.schooling][i + 1]
+                spellList[spell.schooling][i + 1] = spell
+                spellList[spell.schooling][i] = nextSpell
+            }
+            
+        });
+
+        item.querySelector('button.up').addEventListener('click', () => {
+            // Find it in the array
+            const i = spellList[spell.schooling].indexOf(spell)
+
+            // Only move it if it's not already first
+            if (i > 0) {
+                // Move it on the page
+                list.insertBefore(item, item.previousSibling)
+
+                // Move it in the array
+                const previousSpell = spellList[spell.schooling][i - 1]
+                spellList[spell.schooling][i - 1] = spell
+                spellList[spell.schooling][i] = previousSpell
+            }
+        });
+
+     
+
         return item;
     },
 
