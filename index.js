@@ -13,8 +13,8 @@ let renderAll = true;
 const template = document.querySelector('.spellTemplate');
 const list = document.getElementById(`spells`);
 
-const app = {
-    init: function() {
+class App {
+    constructor() {
         const form = document.querySelector('form');
         form.addEventListener('submit', (ev) => {
             ev.preventDefault();
@@ -38,9 +38,9 @@ const app = {
         document.getElementById('favs').addEventListener('click', () => {
             this.displayFavorites();
         });
-    },
+    }
 
-    handleSubmit: function(ev) {
+    handleSubmit(ev) {
         const f = ev.target;
         const school = f.querySelector('select').options[f.querySelector('select').selectedIndex].value;
         const spell = {
@@ -58,28 +58,28 @@ const app = {
         this.renderAll = true;
         
         f.reset();
-    },
+    }
 
     
-    renderAllSpells: function() {
+    renderAllSpells() {
         for(let schoolSpellList in spellList) {
             this.renderList(schoolSpellList);
         };
-    },
+    }
 
-    renderList: function(school) {
+    renderList(school) {
         spellList[school].forEach((spell) => {
             list.appendChild(this.renderItem(spell));
         });
-    },
+    }
 
-    clearList: function() {
+    clearList() {
         while(list.firstElementChild) {
             list.removeChild(list.lastElementChild);
         }
-    },
+    }
     
-    removeFromList: function(spell) {
+    removeFromList(spell) {
         for(let school in spellList) {
             if(spellList[school].indexOf(spell) != -1) {
                 spellList[school].splice(spellList[school].indexOf(spell), 1);
@@ -99,9 +99,9 @@ const app = {
             this.renderList(school);
         }
         
-    },
+    }
     
-    renderItem: function(spell) {
+    renderItem(spell) {
         const properties = Object.keys(spell);
 
         const item = template.cloneNode(true);
@@ -133,45 +133,48 @@ const app = {
             
         });
 
-        item.querySelector('button.down').addEventListener('click', () => {
-            // Find it in the array
-            const i = spellList[spell.schooling].indexOf(spell)
+        item.querySelector('button.down').addEventListener('click', this.moveDown.bind(this, spell, item));
 
-            // Only move it if it's not already last
-            if (i < spellList[spell.schooling].length - 1) {
-                // Move it on the page
-                list.insertBefore(item.nextSibling, item)
-
-                // Move it in the array
-                const nextSpell = spellList[spell.schooling][i + 1]
-                spellList[spell.schooling][i + 1] = spell
-                spellList[spell.schooling][i] = nextSpell
-            }
-            
-        });
-
-        item.querySelector('button.up').addEventListener('click', () => {
-            // Find it in the array
-            const i = spellList[spell.schooling].indexOf(spell)
-
-            // Only move it if it's not already first
-            if (i > 0) {
-                // Move it on the page
-                list.insertBefore(item, item.previousSibling)
-
-                // Move it in the array
-                const previousSpell = spellList[spell.schooling][i - 1]
-                spellList[spell.schooling][i - 1] = spell
-                spellList[spell.schooling][i] = previousSpell
-            }
-        });
+        item.querySelector('button.up').addEventListener('click', this.moveUp.bind(this, spell, item));
 
      
 
         return item;
-    },
+    }
 
-    displayFavorites: function() {
+    moveDown(spell, item) {
+        // Find it in the array
+        const i = spellList[spell.schooling].indexOf(spell)
+
+        // Only move it if it's not already last
+        if (i < spellList[spell.schooling].length - 1) {
+            // Move it on the page
+            list.insertBefore(item.nextSibling, item)
+
+            // Move it in the array
+            const nextSpell = spellList[spell.schooling][i + 1]
+            spellList[spell.schooling][i + 1] = spell
+            spellList[spell.schooling][i] = nextSpell
+        }
+    }
+
+    moveUp(spell, item) {
+        // Find it in the array
+        const i = spellList[spell.schooling].indexOf(spell)
+
+        // Only move it if it's not already first
+        if (i > 0) {
+            // Move it on the page
+            list.insertBefore(item, item.previousSibling)
+
+            // Move it in the array
+            const previousSpell = spellList[spell.schooling][i - 1]
+            spellList[spell.schooling][i - 1] = spell
+            spellList[spell.schooling][i] = previousSpell
+        }
+    }
+
+    displayFavorites() {
         this.clearList();
         favorites.forEach((spell) => {
             list.appendChild(this.renderItem(spell));
@@ -179,4 +182,4 @@ const app = {
     }
 }
 
-app.init();
+const app = new App();
