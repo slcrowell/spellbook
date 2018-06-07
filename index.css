@@ -184,6 +184,10 @@ input.small {
   font-family: 'Homemade Apple', serif;
 }
 
+.spell.fav button {
+  color: blue;
+}
+
 /* Navbar container */
 .navbar {
   overflow: hidden;
