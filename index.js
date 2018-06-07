@@ -1,76 +1,96 @@
-const spellList = [];
+const spellList = {
+    abjuration: [],
+    conjuration: [],
+    divination: [],
+    enchantment: [],
+    evocation: [],
+    illusion: [],
+    necromancy: [],
+    transmutation: [],
+};
 const app = {
     init: function() {
-      const form = document.querySelector('form');
-      form.addEventListener('submit', (ev) => {
-        ev.preventDefault();
-        this.handleSubmit(ev);
-      });
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (ev) => {
+            ev.preventDefault();
+            this.handleSubmit(ev);
+        });
     },
     
     removeFromList: function(spell) {
-        spellList.splice(spellList.indexOf(spell), 1);
-        this.renderList();
+        for(let school in spellList) {
+            if(spellList[school].indexOf(spell) != -1) {
+                spellList[school].splice(spellList[school].indexOf(spell), 1);
+            }
+            this.renderList(school);
+        }
+        
     },
 
     renderProperty: function(name, value) {
-      const el = document.createElement('span');
-      el.classList.add(name);
-      el.textContent = value;
-      el.setAttribute('title', value);
-      return el;
+        const el = document.createElement('span');
+        el.classList.add(name);
+        el.textContent = value;
+        el.setAttribute('title', value);
+        return el;
     },
     
     renderItem: function(spell) {
-      // ['name', 'level']
-      const properties = Object.keys(spell);
-  
-      // collect an array of <span> elements
-      const childElements = properties.map((prop) => {
-        return this.renderProperty(prop, spell[prop]);
-      });
-  
-      const item = document.createElement('li');
-      item.classList.add('spell');
-  
-      // append each <span> to the <li>
-      childElements.forEach(function(el) {
-        item.appendChild(el);
-      });
+        // ['name', 'level']
+        const properties = Object.keys(spell);
 
-      const button = document.createElement('button');
-      button.textContent = 'Delete';
-      button.addEventListener('click', () => {
-         this.removeFromList(spell); 
-      });
-      item.appendChild(button);
-  
-      return item;
+        // collect an array of <span> elements
+        const childElements = properties.map((prop) => {
+            return this.renderProperty(prop, spell[prop]);
+        });
+
+        const item = document.createElement('li');
+        item.classList.add('spell');
+
+        // append each <span> to the <li>
+        childElements.forEach(function(el) {
+            item.appendChild(el);
+        });
+
+        const button = document.createElement('button');
+        button.textContent = 'Delete';
+        button.addEventListener('click', () => {
+            this.removeFromList(spell); 
+        });
+        item.appendChild(button);
+
+        return item;
     },
-  
+
     handleSubmit: function(ev) {
-      const f = ev.target;
-  
-      const spell = {
-        name: f.spellName.value,
-        level: f.level.value,
-      };
-      
-      spellList.push(spell);
-  
-      this.renderList();
-      f.reset();
+        const f = ev.target;
+        const school = f.querySelector('select').options[f.querySelector('select').selectedIndex].value;
+        const spell = {
+            name: f.spellName.value,
+            level: f.level.value,
+        };
+        
+        spellList[school].push(spell);
+
+        for(let schoolSpellList in spellList) {
+            this.renderList(schoolSpellList);
+        };
+
+        f.reset();
     },
 
-    renderList: function() {
-        const list = document.querySelector('#spells');
-        while(list.firstChild) {
-            list.removeChild(list.firstChild);
+    renderList: function(school) {
+        
+        const list = document.querySelector(`#${school}`);
+        
+        while(list.childElementCount > 0) {
+            list.removeChild(list.lastElementChild);
         }
-        spellList.forEach((spell) => {
+
+        spellList[school].forEach((spell) => {
             list.appendChild(this.renderItem(spell));
         });
     }
-  }
-  
-  app.init();
+}
+
+app.init();
