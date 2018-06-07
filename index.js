@@ -1,21 +1,21 @@
-const spellList = {
-    abjuration: [],
-    conjuration: [],
-    divination: [],
-    enchantment: [],
-    evocation: [],
-    illusion: [],
-    necromancy: [],
-    transmutation: [],
-};
-const favorites = [];
-let renderAll = true;
-const template = document.querySelector('.spellTemplate');
-const list = document.getElementById(`spells`);
-
 class App {
     constructor() {
         const form = document.querySelector('form');
+        this.spellList = {
+            abjuration: [],
+            conjuration: [],
+            divination: [],
+            enchantment: [],
+            evocation: [],
+            illusion: [],
+            necromancy: [],
+            transmutation: [],
+        };
+        this.favorites = [];
+        this.renderAll = true;
+        this.template = document.querySelector('.spellTemplate');
+        this.list = document.getElementById(`spells`);
+
         form.addEventListener('submit', (ev) => {
             ev.preventDefault();
             this.handleSubmit(ev);
@@ -24,13 +24,13 @@ class App {
         for(let i = 0; i < buttons.length; i++) {
             buttons[i].addEventListener('click', () => {
                 this.clearList();
-                renderAll = false;
+                this.renderAll = false;
                 this.renderList(buttons[i].id);
             });
         }
 
         document.getElementById('allSpells').addEventListener('click', () => {
-            renderAll = true;
+            this.renderAll = true;
             this.clearList();
             this.renderAllSpells();
         });
@@ -49,7 +49,7 @@ class App {
             schooling: school,
         };
         
-        spellList[school].push(spell);
+        this.spellList[school].push(spell);
 
         this.clearList();
 
@@ -62,33 +62,33 @@ class App {
 
     
     renderAllSpells() {
-        for(let schoolSpellList in spellList) {
+        for(let schoolSpellList in this.spellList) {
             this.renderList(schoolSpellList);
         };
     }
 
     renderList(school) {
-        spellList[school].forEach((spell) => {
-            list.appendChild(this.renderItem(spell));
+        this.spellList[school].forEach((spell) => {
+            this.list.appendChild(this.renderItem(spell));
         });
     }
 
     clearList() {
-        while(list.firstElementChild) {
-            list.removeChild(list.lastElementChild);
+        while(this.list.firstElementChild) {
+            this.list.removeChild(this.list.lastElementChild);
         }
     }
     
     removeFromList(spell) {
-        for(let school in spellList) {
-            if(spellList[school].indexOf(spell) != -1) {
-                spellList[school].splice(spellList[school].indexOf(spell), 1);
+        for(let school in this.spellList) {
+            if(this.spellList[school].indexOf(spell) != -1) {
+                this.spellList[school].splice(this.spellList[school].indexOf(spell), 1);
                 break;
             } 
         }
 
-        if(favorites.indexOf(spell) != -1) {
-            favorites.splice(favorites.indexOf(spell), 1);
+        if(this.favorites.indexOf(spell) != -1) {
+            this.favorites.splice(this.favorites.indexOf(spell), 1);
         }
 
         this.clearList();
@@ -104,7 +104,7 @@ class App {
     renderItem(spell) {
         const properties = Object.keys(spell);
 
-        const item = template.cloneNode(true);
+        const item = this.template.cloneNode(true);
         item.classList.remove('spellTemplate');
         item.classList.add('spell');
 
@@ -125,10 +125,10 @@ class App {
         
         item.querySelector('button.fav').addEventListener('click', () => {
             spell.favorite = item.classList.toggle('fav');
-            if(favorites.indexOf(spell) == -1) {
-                favorites.push(spell);
+            if(this.favorites.indexOf(spell) == -1) {
+                this.favorites.push(spell);
             } else {
-                favorites.splice(favorites.indexOf(spell), 1);
+                this. favorites.splice(favorites.indexOf(spell), 1);
             }
             
         });
@@ -144,40 +144,40 @@ class App {
 
     moveDown(spell, item) {
         // Find it in the array
-        const i = spellList[spell.schooling].indexOf(spell)
+        const i = this.spellList[spell.schooling].indexOf(spell)
 
         // Only move it if it's not already last
-        if (i < spellList[spell.schooling].length - 1) {
+        if (i < this.spellList[spell.schooling].length - 1) {
             // Move it on the page
-            list.insertBefore(item.nextSibling, item)
+            this.list.insertBefore(item.nextSibling, item)
 
             // Move it in the array
-            const nextSpell = spellList[spell.schooling][i + 1]
-            spellList[spell.schooling][i + 1] = spell
-            spellList[spell.schooling][i] = nextSpell
+            const nextSpell = this.spellList[spell.schooling][i + 1]
+            this.spellList[spell.schooling][i + 1] = spell
+            this.spellList[spell.schooling][i] = nextSpell
         }
     }
 
     moveUp(spell, item) {
         // Find it in the array
-        const i = spellList[spell.schooling].indexOf(spell)
+        const i = this.spellList[spell.schooling].indexOf(spell)
 
         // Only move it if it's not already first
         if (i > 0) {
             // Move it on the page
-            list.insertBefore(item, item.previousSibling)
+            this.list.insertBefore(item, item.previousSibling)
 
             // Move it in the array
-            const previousSpell = spellList[spell.schooling][i - 1]
-            spellList[spell.schooling][i - 1] = spell
-            spellList[spell.schooling][i] = previousSpell
+            const previousSpell = this.spellList[spell.schooling][i - 1]
+            this.spellList[spell.schooling][i - 1] = spell
+            this.spellList[spell.schooling][i] = previousSpell
         }
     }
 
     displayFavorites() {
         this.clearList();
-        favorites.forEach((spell) => {
-            list.appendChild(this.renderItem(spell));
+        this.favorites.forEach((spell) => {
+            this.list.appendChild(this.renderItem(spell));
         });
     }
 }
