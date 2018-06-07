@@ -87,6 +87,10 @@ const app = {
             } 
         }
 
+        if(favorites.indexOf(spell) != -1) {
+            favorites.splice(favorites.indexOf(spell), 1);
+        }
+
         this.clearList();
 
         if(renderAll) {
@@ -105,16 +109,22 @@ const app = {
         item.classList.add('spell');
 
         properties.forEach((property) => {
-            const el =  item.querySelector(`.${property}`);
-            el.textContent = spell[property];
-            el.setAttribute('title', spell[property])
+            if(property == 'favorite') {
+                item.classList.add('fav');
+            } else {
+                const el =  item.querySelector(`.${property}`);
+                el.textContent = spell[property];
+                el.setAttribute('title', spell[property])
+                item.classList.remove('fav');
+            } 
          })
 
         item.querySelector('button.delete') .addEventListener('click', () => {
             this.removeFromList(spell);
         });
         
-        item.querySelector('button.fav') .addEventListener('click', () => {
+        item.querySelector('button.fav').addEventListener('click', () => {
+            spell.favorite = item.classList.toggle('fav');
             if(favorites.indexOf(spell) == -1) {
                 favorites.push(spell);
             } else {

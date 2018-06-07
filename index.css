@@ -180,6 +180,9 @@ input.small {
   padding-left: 0.1em;
   white-space: nowrap;
 }
+.spell.fav {
+  font-family: 'Homemade Apple', serif;
+}
 
 /* Navbar container */
 .navbar {
