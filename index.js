@@ -54,11 +54,14 @@ const app = {
 
         const button = document.createElement('button');
         button.textContent = 'Delete';
+        button.style.background = 'transparent';
+        button.style.border = 'transparent';
+        button.style.fontFamily = 'Homemade Apple';
         button.addEventListener('click', () => {
             this.removeFromList(spell); 
         });
         item.appendChild(button);
-
+        item.style.fontFamily = 'Homemade Apple'
         return item;
     },
 

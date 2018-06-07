@@ -30,7 +30,7 @@ h1 {
   margin-left: 10vw;
   margin-top: 5vw;
   margin-bottom: 3vw;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,1);
   font-size: 8vw;
 }
 
@@ -118,9 +118,9 @@ main {
   margin-left: 10vw;
   height: calc(100vh - 18.5vw - 4rem);
   overflow-y: scroll;
-  font-family: "Homemade Apple", cursive;
+  font-family: "UnifrakturCook", cursive;
   font-size: 2rem;
-  color: rgba(100, 50, 0, 0.8);
+  color: rgba(19, 18, 18, 0.8);
   padding: 1.5rem 4rem;
   box-shadow: 1px 1px 15px  rgba(0,0,0,0.4);
 }
@@ -145,14 +145,9 @@ input.small {
 }
 
 .spell .name {
-  text-decoration: underline;
-  width: 80%;
+  width: 50%;
   overflow-x: hidden;
   text-overflow: ellipsis;
   padding-left: 0.1em;
   white-space: nowrap;
-}
-
-.level {
-  color: red;
 }
