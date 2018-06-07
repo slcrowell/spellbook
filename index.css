@@ -151,3 +151,31 @@ input.small {
   padding-left: 0.1em;
   white-space: nowrap;
 }
+
+.spell .schooling {
+  width: 50%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  padding-left: 0.1em;
+  white-space: nowrap;
+}
+
+/* Navbar container */
+.navbar {
+  overflow: hidden;
+  padding-left: 9em;
+  font-family: Arial;
+}
+
+/* Links inside the navbar */
+.navbar button {
+  float: left;
+  font-family: UnifrakturCook, serif;
+  font-size: 16px;
+  background: transparent;
+  border: transparent;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
