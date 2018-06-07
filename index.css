@@ -144,12 +144,33 @@ input.small {
   justify-content: space-between;
 }
 
-.spell .name {
+.spell .schooling {
   width: 50%;
   overflow-x: hidden;
   text-overflow: ellipsis;
   padding-left: 0.1em;
   white-space: nowrap;
+}
+
+.spell .level {
+  width: 20%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  padding-left: 0.1em;
+  white-space: nowrap;
+}
+
+.spell .name {
+  width: 40%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  padding-left: 0.1em;
+  white-space: nowrap;
+}
+.spell button {
+  background: transparent;
+  border: transparent;
+  font-family: UnifrakturCook, serif;
 }
 
 .spell .schooling {
@@ -163,7 +184,7 @@ input.small {
 /* Navbar container */
 .navbar {
   overflow: hidden;
-  padding-left: 9em;
+  padding-left: 5em;
   font-family: Arial;
 }
 
@@ -178,4 +199,8 @@ input.small {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+}
+
+.spellTemplate {
+  visibility: hidden;
 }

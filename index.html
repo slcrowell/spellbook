@@ -43,18 +43,26 @@
     </div>
   </form>
   <div class='navbar'>
-    <button id="abjuration">Abjuration</button>
-    <button id="conjuration">Conjuration</button>
-    <button id="divination">Divination</button>
-    <button id="enchantment">Enchantment</button>
-    <button id="evocation">Evocation</button>
-    <button id="illusion">Illusion</button>
-    <button id="necromancy">Necromancy</button>
-    <button id="transmutation">Transmutation</button>
+    <button class='school' id="abjuration">Abjuration</button>
+    <button class='school' id="conjuration">Conjuration</button>
+    <button class='school' id="divination">Divination</button>
+    <button class='school' id="enchantment">Enchantment</button>
+    <button class='school' id="evocation">Evocation</button>
+    <button class='school' id="illusion">Illusion</button>
+    <button class='school' id="necromancy">Necromancy</button>
+    <button class='school' id="transmutation">Transmutation</button>
     <button id="allSpells">All spells</button>
+    <button id="favs">Favorites</button>
   </div>
   <main>
     <ul id="spells"></ul>
+    <li class="spellTemplate">
+      <span class='name'></span>
+      <span class='level'></span>
+      <span class='schooling'></span>
+      <button class='delete'>Delete</button>
+      <button class='fav'>Favorite</button>
+    </li> 
   </main>
 
   <script src="index.js"></script>

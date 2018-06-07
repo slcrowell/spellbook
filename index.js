@@ -8,7 +8,11 @@ const spellList = {
     necromancy: [],
     transmutation: [],
 };
+const favorites = [];
 let renderAll = true;
+const template = document.querySelector('.spellTemplate');
+const list = document.getElementById(`spells`);
+
 const app = {
     init: function() {
         const form = document.querySelector('form');
@@ -16,11 +20,9 @@ const app = {
             ev.preventDefault();
             this.handleSubmit(ev);
         });
-        const buttons = document.querySelectorAll('button');
-        for(let i = 1; i < buttons.length - 1; i++) {
+        const buttons = document.querySelectorAll('.school');
+        for(let i = 0; i < buttons.length; i++) {
             buttons[i].addEventListener('click', () => {
-                const list = document.getElementById(`spells`);
-        
                 this.clearList();
                 renderAll = false;
                 this.renderList(buttons[i].id);
@@ -32,6 +34,49 @@ const app = {
             this.clearList();
             this.renderAllSpells();
         });
+
+        document.getElementById('favs').addEventListener('click', () => {
+            this.displayFavorites();
+        });
+    },
+
+    handleSubmit: function(ev) {
+        const f = ev.target;
+        const school = f.querySelector('select').options[f.querySelector('select').selectedIndex].value;
+        const spell = {
+            name: f.spellName.value,
+            level: f.level.value,
+            schooling: school,
+        };
+        
+        spellList[school].push(spell);
+
+        this.clearList();
+
+        this.renderAllSpells();
+
+        this.renderAll = true;
+        
+        f.reset();
+    },
+
+    
+    renderAllSpells: function() {
+        for(let schoolSpellList in spellList) {
+            this.renderList(schoolSpellList);
+        };
+    },
+
+    renderList: function(school) {
+        spellList[school].forEach((spell) => {
+            list.appendChild(this.renderItem(spell));
+        });
+    },
+
+    clearList: function() {
+        while(list.firstElementChild) {
+            list.removeChild(list.lastElementChild);
+        }
     },
     
     removeFromList: function(spell) {
@@ -43,95 +88,47 @@ const app = {
         }
 
         this.clearList();
-            if(renderAll) {
-                this.renderAllSpells();
-            } else {
-                this.renderList(school);
-            }
-        
-    },
 
-    renderProperty: function(name, value) {
-        const el = document.createElement('span');
-        el.classList.add(name);
-        el.textContent = value;
-        el.setAttribute('title', value);
-        return el;
+        if(renderAll) {
+            this.renderAllSpells();
+        } else {
+            this.renderList(school);
+        }
+        
     },
     
     renderItem: function(spell) {
-        // ['name', 'level']
         const properties = Object.keys(spell);
 
-        // collect an array of <span> elements
-        const childElements = properties.map((prop) => {
-            return this.renderProperty(prop, spell[prop]);
-        });
-
-        const item = document.createElement('li');
+        const item = template.cloneNode(true);
+        item.classList.remove('spellTemplate');
         item.classList.add('spell');
 
-        // append each <span> to the <li>
-        childElements.forEach(function(el) {
-            item.appendChild(el);
+        properties.forEach((property) => {
+            const el =  item.querySelector(`.${property}`);
+            el.textContent = spell[property];
+            el.setAttribute('title', spell[property])
+         })
+
+        item.querySelector('button.delete') .addEventListener('click', () => {
+            this.removeFromList(spell);
+        });
+        
+        item.querySelector('button.fav') .addEventListener('click', () => {
+            if(favorites.indexOf(spell) == -1) {
+                favorites.push(spell);
+            } else {
+                favorites.splice(favorites.indexOf(spell), 1);
+            }
+            
         });
 
-        const button = document.createElement('button');
-        button.textContent = 'Delete';
-        button.style.background = 'transparent';
-        button.style.border = 'transparent';
-        button.style.fontFamily = 'Homemade Apple';
-        button.addEventListener('click', () => {
-            this.removeFromList(spell); 
-        });
-        item.appendChild(button);
-        item.style.fontFamily = 'Homemade Apple'
         return item;
     },
 
-    handleSubmit: function(ev) {
-        const f = ev.target;
-        const school = f.querySelector('select').options[f.querySelector('select').selectedIndex].value;
-        const spell = {
-            name: f.spellName.value,
-            schooling: f.querySelector('select').options[f.querySelector('select').selectedIndex].value,
-            level: f.level.value,
-        };
-        
-        spellList[school].push(spell);
-
-        const list = document.getElementById(`spells`);
-
+    displayFavorites: function() {
         this.clearList();
-
-        this.renderAllSpells();
-
-        this.renderAll = true;
-        
-        f.reset();
-    },
-
-    clearList: function() {
-        const list = document.getElementById(`spells`);
-
-        while(list.firstElementChild) {
-            list.removeChild(list.lastElementChild);
-        }
-    },
-
-    renderAllSpells: function() {
-        const list = document.getElementById(`spells`);
-
-        for(let schoolSpellList in spellList) {
-            this.renderList(schoolSpellList);
-        };
-    },
-
-    renderList: function(school) {
-        
-        const list = document.getElementById(`spells`);
-        
-        spellList[school].forEach((spell) => {
+        favorites.forEach((spell) => {
             list.appendChild(this.renderItem(spell));
         });
     }
