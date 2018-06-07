@@ -38,15 +38,16 @@ const app = {
         for(let school in spellList) {
             if(spellList[school].indexOf(spell) != -1) {
                 spellList[school].splice(spellList[school].indexOf(spell), 1);
-            }
-            this.clearList();
+                break;
+            } 
+        }
+
+        this.clearList();
             if(renderAll) {
                 this.renderAllSpells();
             } else {
                 this.renderList(school);
             }
-            
-        }
         
     },
 
